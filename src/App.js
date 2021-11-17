@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect } from 'react';
 import Form from './components/Form';
 import Appointment from './components/Appointment';
+import PropTypes from 'prop-types';
 
 function App() {
 
@@ -16,7 +17,6 @@ function App() {
 
   // Use effect to make operations when the state change
   useEffect( () => {
-    console.log(appointments);
     localStorage.setItem('appointments', JSON.stringify(appointments)); 
   }, [appointments]);
 
@@ -61,6 +61,10 @@ function App() {
       </div> 
     </Fragment>
   );
+}
+
+Form.propTypes = {
+  createAppointment: PropTypes.func.isRequired
 }
 
 export default App;

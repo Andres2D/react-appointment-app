@@ -14,6 +14,12 @@ function App() {
       appointment
     ]);
   }
+
+  // Delete appointment by id
+  const deleteAppointment = id => {
+    const newAppointments = appointments.filter(a => a.id !== id);
+    saveAppointments(newAppointments);
+  }
   
   return (
     <Fragment>
@@ -31,6 +37,7 @@ function App() {
               <Appointment 
                 key={appointment.id}
                 appointment={appointment}
+                deleteAppointment={deleteAppointment}
               />
             ))}
           </div>

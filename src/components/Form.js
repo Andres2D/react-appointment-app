@@ -47,6 +47,13 @@ const Form = ({createAppointment}) => {
         createAppointment(appointment);
 
         // restart form
+        updateAppointment({
+            pet: '',
+            parent: '',
+            date: '',
+            time: '',
+            description: ''
+        })
     }
 
     return ( 

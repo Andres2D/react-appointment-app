@@ -1,11 +1,24 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import Form from './components/Form';
 import Appointment from './components/Appointment';
 
 function App() {
+
+  // Appointments on localstorage
+  let initialsAppointments = JSON.parse(localStorage.getItem('appointments'));
+
+  if(!initialsAppointments) {
+    initialsAppointments = [];
+  }
   
   // Appointments arr
-  const [appointments, saveAppointments] = useState([]);
+  const [appointments, saveAppointments] = useState(initialsAppointments);
+
+  // Use effect to make operations when the state change
+  useEffect( () => {
+    console.log(appointments);
+    localStorage.setItem('appointments', JSON.stringify(appointments)); 
+  }, [appointments]);
 
   // Function to get the current appointments and add a new one
   const createAppointment = appointment => {
@@ -20,6 +33,9 @@ function App() {
     const newAppointments = appointments.filter(a => a.id !== id);
     saveAppointments(newAppointments);
   }
+
+  // Message conditional
+  const title = appointments.length === 0 ? 'Empty' : 'Appointments'; 
   
   return (
     <Fragment>
@@ -32,7 +48,7 @@ function App() {
               createAppointment={createAppointment} />
           </div>
           <div className="one-half column">
-            <h2>Appointments</h2>  
+            <h2>{title}</h2>  
             {appointments.map(appointment => (
               <Appointment 
                 key={appointment.id}

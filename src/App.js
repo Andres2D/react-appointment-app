@@ -1,6 +1,22 @@
+import { Fragment } from 'react';
+import Form  from './components/Form';
+
 function App() {
   return (
-    <h1>Admin appoitments</h1>
+    <Fragment>
+      <h1>Admin appointments</h1>
+
+      <div className="container">
+        <div className="row">
+          <div className="one-half column">
+            <Form />
+          </div>
+          <div className="one-half column">
+            2
+          </div>
+        </div>
+      </div> 
+    </Fragment>
   );
 }
 

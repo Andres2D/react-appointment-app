@@ -1,6 +1,22 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
 const Form = () => {
+
+    // Create state of appointments
+    const [appointment, updateAppointment] = useState({
+        pet: '',
+        parent: '',
+        date: '',
+        time: '',
+        description: ''
+    });
+
+
+    // Function on change input
+    const updateState = () => {
+        console.log('writing');
+    }
+
     return ( 
         <Fragment>
             <h2>Create appointment</h2>  
@@ -12,6 +28,7 @@ const Form = () => {
                     name="pet"
                     className="u-full-width"
                     placeholder="Pet's Name"
+                    onChange={updateState}
                 />
 
                 <label>Parent name</label>
@@ -20,6 +37,7 @@ const Form = () => {
                     name="parent"
                     className="u-full-width"
                     placeholder="Parent Name"
+                    onChange={updateState}
                 />
 
                 <label>Date</label>
@@ -27,6 +45,7 @@ const Form = () => {
                     type="date"
                     name="date"
                     className="u-full-width"
+                    onChange={updateState}
                 />
 
                 <label>Time</label>
@@ -34,12 +53,14 @@ const Form = () => {
                     type="time"
                     name="time"
                     className="u-full-width"
+                    onChange={updateState}
                 />
 
                 <label>Description</label>
                 <textarea 
                     className="u-full-width"
-                    name="description">
+                    name="description"
+                    onChange={updateState}>
                 </textarea>
 
                 <button 

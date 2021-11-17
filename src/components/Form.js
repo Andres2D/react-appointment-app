@@ -13,9 +13,16 @@ const Form = () => {
 
 
     // Function on change input
-    const updateState = () => {
+    const updateState = ({target}) => {
+        updateAppointment({
+            ...appointment,
+            [target.name] : target.value
+        })
         console.log('writing');
     }
+
+    // Extract the values
+    const {pet, parent, date, time, description } = appointment;
 
     return ( 
         <Fragment>
@@ -29,6 +36,7 @@ const Form = () => {
                     className="u-full-width"
                     placeholder="Pet's Name"
                     onChange={updateState}
+                    value={pet}
                 />
 
                 <label>Parent name</label>
@@ -38,6 +46,7 @@ const Form = () => {
                     className="u-full-width"
                     placeholder="Parent Name"
                     onChange={updateState}
+                    value={parent}
                 />
 
                 <label>Date</label>
@@ -46,6 +55,7 @@ const Form = () => {
                     name="date"
                     className="u-full-width"
                     onChange={updateState}
+                    value={date}
                 />
 
                 <label>Time</label>
@@ -54,13 +64,15 @@ const Form = () => {
                     name="time"
                     className="u-full-width"
                     onChange={updateState}
+                    value={time}
                 />
 
                 <label>Description</label>
                 <textarea 
                     className="u-full-width"
                     name="description"
-                    onChange={updateState}>
+                    onChange={updateState}
+                    value={description}>
                 </textarea>
 
                 <button 

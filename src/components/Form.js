@@ -1,4 +1,5 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react';
+import {v4 as uuid} from 'uuid'; 
 
 const Form = () => {
 
@@ -11,24 +12,49 @@ const Form = () => {
         description: ''
     });
 
+    const [error, updateError] = useState(false);
 
     // Function on change input
     const updateState = ({target}) => {
         updateAppointment({
             ...appointment,
             [target.name] : target.value
-        })
-        console.log('writing');
+        });
     }
 
     // Extract the values
     const {pet, parent, date, time, description } = appointment;
 
+    // Send form
+    const submitAppointment = event => {
+        event.preventDefault();
+        
+        // validate
+        if(pet.trim() === '' || parent.trim() === '' || date.trim() === '' 
+        || time.trim() === '' || description.trim() === '') {
+            console.log('Invalid pet');
+            updateError(true);
+            return;
+        }
+
+        // Disable error alert
+        updateError(false);
+
+        // asign Id
+        appointment.id = uuid();
+        console.log(appointment);
+
+        // create appointment
+
+        // restart form
+    }
+
     return ( 
         <Fragment>
             <h2>Create appointment</h2>  
-
-            <form>
+            { error ? <p className="alerta-error">All fields are required</p> : null}
+            <form
+                onSubmit={submitAppointment}>
                 <label>Pet's name</label>
                 <input 
                     type="text"
